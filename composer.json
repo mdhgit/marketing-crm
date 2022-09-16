@@ -1,0 +1,17 @@
+{
+    "name": "mdh/marketing-crm",
+    "autoload": {
+        "psr-4": {
+            "Mdh\\MarketingCrm\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "sahib-singh-mdh",
+            "email": "101691940+sahib-singh-mdh@users.noreply.github.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "6.5.3"
+    }
+}
