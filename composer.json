@@ -12,6 +12,7 @@
         }
     ],
     "require": {
-        "activecampaign/api-php": "1.0.0"
+        "activecampaign/api-php": "1.0.0",
+        "guzzlehttp/guzzle": "6.5.3"
     }
 }
