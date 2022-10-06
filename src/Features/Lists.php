@@ -5,40 +5,40 @@ namespace Mdh\MarketingCrm\Features;
 use Illuminate\Http\Request;
 use Mdh\MarketingCrm\Crm;
 
-class Contact
+class Lists
 {
-    public function getAllContacts($auth)
+    public function getAllLists($auth)
     {
         $crm = new Crm();
-        $endPoint = 'contacts';
+        $endPoint = 'lists';
         $body = null;
         $method = 'GET';
 
         return $crm->init($endPoint, $body, $method, $auth);
     }
 
-    public function createContact($auth, $body)
+    public function createList($auth, $body)
     {
         $crm = new Crm();
-        $endPoint = 'contacts';
+        $endPoint = 'lists';
         $method = 'POST';
 
         return $crm->init($endPoint, $body, $method, $auth);
     }
 
-    public function updateContact($auth, $body, $id)
+    public function updateList($auth, $body, $id)
     {
         $crm = new Crm();
-        $endPoint = "contacts/$id";
+        $endPoint = "lists/$id";
         $method = 'PUT';
 
         return $crm->init($endPoint, $body, $method, $auth, $id);
     }
 
-    public function deleteContact($auth, $id)
+    public function deleteList($auth, $id)
     {
         $crm = new Crm();
-        $endPoint = "contacts/$id";
+        $endPoint = "lists/$id";
         $body = null;
         $method = 'DELETE';
 

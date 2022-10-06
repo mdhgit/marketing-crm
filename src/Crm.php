@@ -7,15 +7,7 @@ use Illuminate\Http\Request;
 
 class Crm {
 
-    public function createContact(Request $request, $auth)
-    {
-        $body = $request->all();
-        $endPoint = 'contacts';
-        $method = 'POST';
-        return $this->init($endPoint, $body, $method, $auth);
-    }
-
-    public function init($endPoint, $body, $method, $auth)
+    public function init($endPoint, $body = null, $method, $auth, $id = null)
     {
         $apiKey = $auth['apiKey'];
         $apiUrl = $auth['apiUrl'];
@@ -44,8 +36,32 @@ class Crm {
                 ]);
                 break;
             
+            case 'PUT':
+                $response = $client->request($method, "$apiUrl/api/3/$endPoint/$id", [
+                    'body' => json_encode($body),
+                    'headers' => [
+                        'Accept' => 'application/json',
+                        'Api-Token' => $apiKey,
+                        'Content-Type' => 'application/json',
+                    ],
+                ]);
+                break;
+
+            case 'DELETE':
+                $response = $client->request($method, "$apiUrl/api/3/$endPoint/$id", [
+                    'body' => json_encode($body),
+                    'headers' => [
+                        'Accept' => 'application/json',
+                        'Api-Token' => $apiKey,
+                        'Content-Type' => 'application/json',
+                    ],
+                ]);
+                break;
+            
             default:
-                # code...
+                return response()->json([
+                    'response' => "Something Went Wrong, Please Try Again After Some Time"
+                ]);
                 break;
         }
 
