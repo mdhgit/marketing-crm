@@ -7,35 +7,18 @@ use Illuminate\Http\Request;
 
 class Crm {
 
-    public function justDoIt() {
-        $http = new Client();
-
-        $response = $http->request('GET', "https://inspiration.goprogram.ai/", [
-            'headers' => [
-                'Accept' => 'application/json',
-                'Content-Type' => 'application/json',
-            ],
-        ])->getBody()->getContents();
-
-        $response = json_decode($response);
-
-        return response()->json([
-            'res' => $response->quote . ' -' . $response->author
-        ]);
-    }
-
-    public function createContact(Request $request)
+    public function createContact(Request $request, $auth)
     {
         $body = $request->all();
         $endPoint = 'contacts';
         $method = 'POST';
-        return $this->init($endPoint, $body, $method);
+        return $this->init($endPoint, $body, $method, $auth);
     }
 
-    private function init($endPoint, $body, $method)
+    public function init($endPoint, $body, $method, $auth)
     {
-        $apiKey = config('activecampaign.api_key');
-        $apiUrl = config('activecampaign.api_url');
+        $apiKey = $auth['apiKey'];
+        $apiUrl = $auth['apiUrl'];
 
         $client = new Client();
 

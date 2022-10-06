@@ -3,20 +3,28 @@
 namespace Mdh\MarketingCrm\Controllers;
 
 use Illuminate\Http\Request;
-use Mdh\MarketingCrm\Crm;
-use \ActiveCampaign as ActiveCampaign;
+use Mdh\MarketingCrm\Features\Contact;
 
 class CrmController
 {
-    public function index(Crm $inspire) {
-        $quote = $inspire->justDoIt();
+    private $auth;
 
-        return $quote;
+    public function __construct()
+    {
+        $apiKey = config('activecampaign.api_key');
+        $apiUrl = config('activecampaign.api_url');
+
+        $this->auth = [
+            'apiKey' => $apiKey,
+            'apiUrl' => $apiUrl
+        ];
     }
 
-    public function createContact(Request $request, Crm $inspire)
+    public function createContact(Request $request, Contact $contact)
     {
-        $res = $inspire->createContact($request);
+        $data = $request->all();
+
+        $res = $contact->create($this->auth, $data);
 
         return $res;
     }
