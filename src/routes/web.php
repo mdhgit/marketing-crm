@@ -8,6 +8,10 @@ Route::get('contacts', [CrmController::class, 'getAllContacts']);
 Route::post('contacts', [CrmController::class, 'createContact']);
 Route::put('contacts/{id}', [CrmController::class, 'updateContact']);
 Route::delete('contacts/{id}', [CrmController::class, 'deleteContact']);
+Route::post('contacts/add-custom-field', [CrmController::class, 'addCustomField']);
+Route::put('contacts/add-custom-field/{fieldId}', [CrmController::class, 'updateCustomField']);
+Route::post('contacts/add-contact-to-list', [CrmController::class, 'addContactToList']);
+Route::post('contacts/add-tag-to-contact', [CrmController::class, 'addTagToContact']);
 
 # Tags
 Route::get('tags', [CrmController::class, 'getAllTags']);
@@ -18,7 +22,6 @@ Route::delete('tags/{id}', [CrmController::class, 'deleteTag']);
 # Lists
 Route::get('lists', [CrmController::class, 'getAllLists']);
 Route::post('lists', [CrmController::class, 'createList']);
-Route::put('lists/{id}', [CrmController::class, 'updateList']);
 Route::delete('lists/{id}', [CrmController::class, 'deleteList']);
 
 # Fields

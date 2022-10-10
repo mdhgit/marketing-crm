@@ -50,15 +50,53 @@ class CrmController
         return $res;
     }
 
-    public function deleteContact(Request $request, Contact $contact, $id)
+    public function deleteContact(Contact $contact, $id)
     {
         $res = $contact->deleteContact($this->auth, $id);
 
         return $res;
     }
 
+    public function addCustomField(Request $request, Contact $contact)
+    {
+        $data = $request->all();
 
-    ### Contacts CRUD ###
+        $res = $contact->addCustomField($this->auth, $data);
+
+        return $res;
+    }
+
+    public function updateCustomField(Request $request, Contact $contact, $fieldId)
+    {
+        $data = $request->all();
+
+        $res = $contact->updateCustomField($this->auth, $data, $fieldId);
+
+        return $res;
+    }
+
+    public function addContactToList(Request $request, Contact $contact)
+    {
+        // status: 1 -> Add, status: 2 -> Remove
+        $data = $request->all();
+
+        $res = $contact->addContactToList($this->auth, $data);
+
+        return $res;
+    }
+
+    public function addTagToContact(Request $request, Contact $contact)
+    {
+        // status: 1 -> Add, status: 2 -> Remove
+        $data = $request->all();
+
+        $res = $contact->addTagToContact($this->auth, $data);
+
+        return $res;
+    }
+
+
+    ### Tags CRUD ###
 
     public function getAllTags(Tag $tag)
     {
@@ -107,15 +145,6 @@ class CrmController
         $data = $request->all();
 
         $res = $list->createList($this->auth, $data);
-
-        return $res;
-    }
-
-    public function updateList(Request $request, Lists $list, $id)
-    {
-        $data = $request->all();
-
-        $res = $list->updateList($this->auth, $data, $id);
 
         return $res;
     }

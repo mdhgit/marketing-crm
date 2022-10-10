@@ -26,15 +26,6 @@ class Lists
         return $crm->init($endPoint, $body, $method, $auth);
     }
 
-    public function updateList($auth, $body, $id)
-    {
-        $crm = new Crm();
-        $endPoint = "lists/$id";
-        $method = 'PUT';
-
-        return $crm->init($endPoint, $body, $method, $auth, $id);
-    }
-
     public function deleteList($auth, $id)
     {
         $crm = new Crm();
