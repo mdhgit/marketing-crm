@@ -3,6 +3,7 @@
 namespace Mdh\MarketingCrm\Controllers;
 
 use Illuminate\Http\Request;
+use Mdh\MarketingCrm\Features\Automation;
 use Mdh\MarketingCrm\Features\Contact;
 use Mdh\MarketingCrm\Features\Field;
 use Mdh\MarketingCrm\Features\Lists;
@@ -187,6 +188,43 @@ class CrmController
     public function deleteField(Field $field, $id)
     {
         $res = $field->deleteField($this->auth, $id);
+
+        return $res;
+    }
+
+    public function listAutomations(Automation $automation)
+    {
+        $res = $automation->listAutomations($this->auth);
+
+        return $res;
+    }
+
+    public function addContactToAutomation(Request $request, Automation $automation)
+    {
+        $data = $request->all();
+
+        $res = $automation->addContactToAutomation($this->auth, $data);
+
+        return $res;
+    }
+
+    public function removeContactFromAutomation(Request $request, Automation $automation, $id)
+    {
+        $res = $automation->removeContactFromAutomation($this->auth, $id);
+
+        return $res;
+    }
+
+    public function listAllAutomationsForContact(Automation $automation, $id)
+    {
+        $res = $automation->listAllAutomationsForContact($this->auth, $id);
+
+        return $res;
+    }
+
+    public function contactAndAutomationLinking(Automation $automation)
+    {
+        $res = $automation->contactAndAutomationLinking($this->auth);
 
         return $res;
     }

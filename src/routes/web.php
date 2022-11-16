@@ -13,6 +13,13 @@ Route::put('contacts/add-custom-field/{fieldId}', [CrmController::class, 'update
 Route::post('contacts/add-contact-to-list', [CrmController::class, 'addContactToList']);
 Route::post('contacts/add-tag-to-contact', [CrmController::class, 'addTagToContact']);
 
+# Automations
+Route::get('automations', [CrmController::class, 'listAutomations']);
+Route::post('add-contact-to-automation', [CrmController::class, 'addContactToAutomation']);
+Route::delete('remove-contact-from-automation/{id}', [CrmController::class, 'removeContactFromAutomation']);
+Route::get('list-automations-for-contact/{id}', [CrmController::class, 'listAllAutomationsForContact']);
+Route::get('contact-automations-linkings', [CrmController::class, 'contactAndAutomationLinking']);
+
 # Tags
 Route::get('tags', [CrmController::class, 'getAllTags']);
 Route::post('tags', [CrmController::class, 'createTag']);
