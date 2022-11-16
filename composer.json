@@ -1,5 +1,6 @@
 {
     "name": "mdhgit/marketing-crm",
+    "license": "MIT",
     "autoload": {
         "psr-4": {
             "Mdh\\MarketingCrm\\": "src/"
