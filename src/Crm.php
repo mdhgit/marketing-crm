@@ -7,6 +7,20 @@ use Illuminate\Http\Request;
 
 class Crm {
 
+    public function call($endPoint,$body, $method){
+        $response = $client->request($method, "$apiUrl/$endPoint", [
+            'body' => json_encode($body),
+            'headers' => [
+              'Accept' => 'application/json',
+              'Content-Type' => 'application/json',
+            ],
+        ]);
+
+        return response()->json([
+            'response' => json_decode($response->getBody())
+        ]);
+    }
+
     public function init($endPoint, $body = null, $method, $auth, $id = null)
     {
         $apiKey = $auth['apiKey'];
