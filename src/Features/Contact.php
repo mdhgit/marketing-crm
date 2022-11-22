@@ -19,6 +19,18 @@ class Contact
         return $crm->init($apiUrl, $body, $method, $auth);
     }
 
+    public function filterContacts($auth, $endPoint)
+    {
+        $crm = new Crm();
+        // $endPoint = 'contacts';
+        $apiUrl = $auth['apiUrl'];
+        $apiUrl = "$apiUrl/api/3/$endPoint";
+        $body = null;
+        $method = 'GET';
+
+        return $crm->init($apiUrl, $body, $method, $auth);
+    }
+
     public function createContact($auth, $body)
     {
         $crm = new Crm();
