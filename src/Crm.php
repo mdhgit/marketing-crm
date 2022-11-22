@@ -7,30 +7,13 @@ use Illuminate\Http\Request;
 
 class Crm {
 
-    public function call($endPoint,$body, $method){
-        $response = $client->request($method, "$apiUrl/$endPoint", [
-            'body' => json_encode($body),
-            'headers' => [
-              'Accept' => 'application/json',
-              'Content-Type' => 'application/json',
-            ],
-        ]);
-
-        return response()->json([
-            'response' => json_decode($response->getBody())
-        ]);
-    }
-
-    public function init($endPoint, $body = null, $method, $auth, $id = null)
+    public function init($apiUrl, $body = null, $method, $apiKey)
     {
-        $apiKey = $auth['apiKey'];
-        $apiUrl = $auth['apiUrl'];
-
         $client = new Client();
 
         switch ($method) {
             case 'GET':
-                $response = $client->request($method, "$apiUrl/api/3/$endPoint", [
+                $response = $client->request($method, $apiUrl, [
                     'headers' => [
                       'Accept' => 'application/json',
                       'Api-Token' => $apiKey,
@@ -40,7 +23,7 @@ class Crm {
                 break;
 
             case 'POST':
-                $response = $client->request($method, "$apiUrl/api/3/$endPoint", [
+                $response = $client->request($method, $apiUrl, [
                     'body' => json_encode($body),
                     'headers' => [
                       'Accept' => 'application/json',
@@ -51,7 +34,7 @@ class Crm {
                 break;
             
             case 'PUT':
-                $response = $client->request($method, "$apiUrl/api/3/$endPoint/$id", [
+                $response = $client->request($method, $apiUrl, [
                     'body' => json_encode($body),
                     'headers' => [
                         'Accept' => 'application/json',
@@ -62,7 +45,7 @@ class Crm {
                 break;
 
             case 'DELETE':
-                $response = $client->request($method, "$apiUrl/api/3/$endPoint/$id", [
+                $response = $client->request($method, $apiUrl, [
                     'body' => json_encode($body),
                     'headers' => [
                         'Accept' => 'application/json',
