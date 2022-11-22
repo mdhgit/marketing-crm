@@ -7,9 +7,10 @@ use Illuminate\Http\Request;
 
 class Crm {
 
-    public function init($apiUrl, $body = null, $method, $apiKey)
+    public function init($apiUrl, $body = null, $method, $auth)
     {
         $client = new Client();
+        $apiKey = $auth['apiKey'];
 
         switch ($method) {
             case 'GET':
