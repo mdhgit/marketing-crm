@@ -8,13 +8,12 @@ use Mdh\MarketingCrm\Crm;
 class Event
 {
     
-    public function register($auth, $body)
+    public function register($auth, $body, $urlEndPoint)
     {
         $crm = new Crm();
-        $endPoint = 'event';
         $method = 'POST';
 
-        return $crm->init($endPoint, $body, $method, $auth);
+        return $crm->init($urlEndPoint, $body, $method, $auth);
     }
 
     public function prepareEventArray($email, $event, $actId, $key,$eventData=null)
