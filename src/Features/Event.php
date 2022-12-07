@@ -12,8 +12,9 @@ class Event
     {
         $crm = new Crm();
         $method = 'POST';
+        $specialCase = true;
 
-        return $crm->init($urlEndPoint, $body, $method, $auth);
+        return $crm->init($urlEndPoint, $body, $method, $auth, $specialCase);
     }
 
     public function prepareEventArray($email, $event, $actId, $key,$eventData=null)

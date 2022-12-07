@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class Crm {
 
-    public function init($apiUrl, $body = null, $method, $auth)
+    public function init($apiUrl, $body = null, $method, $auth, $specialCase)
     {
         $client = new Client();
         $apiKey = $auth['apiKey'];
@@ -24,14 +24,25 @@ class Crm {
                 break;
 
             case 'POST':
-                $response = $client->request($method, $apiUrl, [
-                    'body' => json_encode($body),
-                    'headers' => [
-                      'Accept' => 'application/json',
-                      'Api-Token' => $apiKey,
-                      'Content-Type' => 'application/json',
-                    ],
-                ]);
+                if($specialCase) {
+                    $response = $client->request($method, $apiUrl, [
+                        'form_params' => $body,
+                        'headers' => [
+                          'Api-Token' => $apiKey,
+                          'Content-Type' => 'application/x-www-form-urlencoded',
+                        ],
+                    ]);
+                } else {
+
+                    $response = $client->request($method, $apiUrl, [
+                        'body' => json_encode($body),
+                        'headers' => [
+                          'Accept' => 'application/json',
+                          'Api-Token' => $apiKey,
+                          'Content-Type' => 'application/json',
+                        ],
+                    ]);
+                }
                 break;
             
             case 'PUT':
