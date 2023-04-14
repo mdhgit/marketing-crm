@@ -108,4 +108,45 @@ class Contact
 
         return $crm->init($apiUrl, $body, $method, $auth);
     }
+
+    public function getConatctTagAssociation($auth, $body, $contactId, $tagName)
+    {
+        $associationId = null;
+
+        $crm = new Crm();
+        $endPoint = "contactTags";
+        $apiUrl = $auth['apiUrl'];
+        $apiUrl = "$apiUrl/api/3/contacts/$contactId/$endPoint";
+        $method = 'GET';
+
+        $contactTagAssociation = $crm->init($apiUrl, $body, $method, $auth);
+        $contactTagAssociation = $contactTagAssociation->getData()->response->contactTags;
+
+        $tagId = null;
+        $tag = new Tag;
+        $tagResponse = $tag->searchTag($auth, $tagName);
+        $tagId = $tagResponse->getData()->response->tags[0]->id;
+
+        foreach($contactTagAssociation as $association) {
+
+            if($association->tag == $tagId) {
+                $associationId = $association->id;
+            }
+        }
+
+        return $associationId;
+    }
+
+    public function removeTagToContact($auth, $body, $contactId, $tagName)
+    {
+        $crm = new Crm();
+        $endPoint = "contactTags";
+        $apiUrl = $auth['apiUrl'];
+        $associationId = $this->getConatctTagAssociation($auth, $body, $contactId, $tagName);
+
+        $apiUrl = "$apiUrl/api/3/$endPoint/$associationId";
+        $method = 'DELETE';
+
+        return $crm->init($apiUrl, $body, $method, $auth);
+    }
 }
