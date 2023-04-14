@@ -58,7 +58,7 @@ class Tag
         $crm = new Crm();
         $endPoint = 'tags';
         $apiUrl = $auth['apiUrl'];
-        $apiUrl = "$apiUrl/api/3/$endPoint/filters[search][eq]=$searchString";
+        $apiUrl = "$apiUrl/api/3/$endPoint?filters[search][eq]=$searchString";
         $body = null;
         $method = 'GET';
 
