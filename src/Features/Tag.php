@@ -52,4 +52,16 @@ class Tag
 
         return $crm->init($apiUrl, $body, $method, $auth, $id);
     }
+
+    public function searchTag($auth, $searchString)
+    {
+        $crm = new Crm();
+        $endPoint = 'tags';
+        $apiUrl = $auth['apiUrl'];
+        $apiUrl = "$apiUrl/api/3/$endPoint/filters[search][eq]=$searchString";
+        $body = null;
+        $method = 'GET';
+
+        return $crm->init($apiUrl, $body, $method, $auth);
+    }
 }
