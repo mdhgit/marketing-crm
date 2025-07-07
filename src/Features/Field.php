@@ -19,6 +19,18 @@ class Field
         return $crm->init($apiUrl, $body, $method, $auth);
     }
 
+    public function searchField($auth, $search)
+    {
+        $crm = new Crm();
+        $endPoint = 'fields';
+        $apiUrl = $auth['apiUrl'];
+        $apiUrl = "$apiUrl/api/3/$endPoint?$search";
+        $body = null;
+        $method = 'GET';
+
+        return $crm->init($apiUrl, $body, $method, $auth);
+    }
+
     public function createField($auth, $body)
     {
         $crm = new Crm();
