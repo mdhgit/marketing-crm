@@ -31,6 +31,18 @@ class Field
         return $crm->init($apiUrl, $body, $method, $auth);
     }
 
+    public function getAllFieldsWithLimit($auth, $limit)
+    {
+        $crm = new Crm();
+        $endPoint = 'fields';
+        $apiUrl = $auth['apiUrl'];
+        $apiUrl = "$apiUrl/api/3/$endPoint?limit=$limit";
+        $body = null;
+        $method = 'GET';
+
+        return $crm->init($apiUrl, $body, $method, $auth);
+    }
+
     public function createField($auth, $body)
     {
         $crm = new Crm();
